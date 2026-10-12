@@ -69,3 +69,20 @@ Vào thư mục chứa file `SamplerTree.c` rồi gõ:
 gcc SamplerTree.c -o SamplerTree
 ./SamplerTree
 ```
+
+## Phiên bản dùng con trỏ
+
+`SamplerTreePointers.c` là phiên bản riêng, trong đó mỗi nút được cấp phát động
+và liên kết trực tiếp tới các nút con bằng `Node *left` và `Node *right`. Mảng
+`nodeRegistry` chỉ quản lý các nút đã cấp phát; các liên kết của cây là con trỏ.
+
+Khi nhập cây, lần lượt nhập thông tin của từng nút, rồi nhập ID con trái và con
+phải theo đúng thứ tự các nút vừa khai báo, sau đó nhập ID của nút gốc. ID phải
+là số nguyên dương và duy nhất; nhập `0` khi một nút con không tồn tại.
+Chương trình yêu cầu ít nhất 4 nút lá và 3 nút quyết định. Nút lá phải có cả
+hai con rỗng; nút quyết định phải có ít nhất một nút con.
+
+```bash
+gcc SamplerTreePointers.c -o SamplerTreePointers
+./SamplerTreePointers
+```
