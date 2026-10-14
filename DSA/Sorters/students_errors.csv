@@ -1,0 +1,10 @@
+id,name,gpa,credits,discipline
+SV01,An,3.20,25,0
+SV02,Minh,3.85,28
+SV03,Vy,abc,40,0
+SV04,Huy,4.50,28,0
+SV01,Trùng mã,3.50,30,0
+,Không mã,3.50,30,0
+SV05,Hà,3.70,-5,0
+SV06,Dũng,3.70,33,2
+SV07,Bình,3.90,30,0
