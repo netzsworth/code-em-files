@@ -5,7 +5,7 @@
 #include "student.c"
 #include "sorts.c"
 
-typedef enum { ALG_INSERTION = 1, ALG_SELECTION, ALG_BUBBLE } Alg;
+typedef enum { ALG_INSERTION = 1, ALG_SELECTION, ALG_BUBBLE, ALG_QUICK } Alg;
 typedef enum { CRIT_MAIN = 1, CRIT_GPA } Crit;
 
 static const char *alg_name(Alg a) {
@@ -15,7 +15,10 @@ static const char *alg_name(Alg a) {
     if (a == ALG_SELECTION) {
         return "Selection Sort";
     }
-    return "Bubble Sort";
+    if (a == ALG_BUBBLE) {
+        return "Bubble Sort";
+    }
+    return "Quick Sort";
 }
 
 static const char *crit_name(Crit c) {
@@ -37,8 +40,10 @@ static void run_sort(Alg a, Student *arr, int n, CompareFn cmp, SortStats *st) {
         insertion_sort(arr, n, cmp, st);
     } else if (a == ALG_SELECTION) {
         selection_sort(arr, n, cmp, st);
-    } else {
+    } else if (a == ALG_BUBBLE) {
         bubble_sort(arr, n, cmp, st);
+    } else {
+        quick_sort(arr, n, cmp, st);
     }
 }
 
@@ -152,9 +157,9 @@ static void do_sort(void) {
     if (!ensure_filtered()) {
         return;
     }
-    printf("1. Insertion Sort\n2. Selection Sort\n3. Bubble Sort\n");
+    printf("1. Insertion Sort\n2. Selection Sort\n3. Bubble Sort\n4. Quick Sort\n");
     int a = read_int("Chon thuat toan: ");
-    if (a < 1 || a > 3) {
+    if (a < 1 || a > 4) {
         printf("Lua chon khong hop le.\n");
         return;
     }
@@ -230,7 +235,7 @@ static void do_compare_all(void) {
     CompareFn cmp = crit_fn(g_crit);
     printf("Tieu chi: %s | n = %d\n", crit_name(g_crit), g_eligible.size);
     printf("  %-16s %12s %12s %12s %8s %8s\n", "Thuat toan", "So sanh", "Di chuyen", "Thoi gian(s)", "Dung", "On dinh");
-    for (int a = 1; a <= 3; a++) {
+    for (int a = 1; a <= 4; a++) {
         StudentList tmp;
         sl_init(&tmp);
         if (sl_copy(&tmp, &g_eligible) != 0) {
@@ -310,7 +315,7 @@ static void print_menu(void) {
     printf("4. Xep hang bang thuat toan (F3)\n");
     printf("5. Hien thi Top K va thong ke (F5)\n");
     printf("6. Ghi ranked.csv, valid.csv, rejected.csv, summary.txt (F6)\n");
-    printf("7. So sanh ca 3 thuat toan\n");
+    printf("7. So sanh ca 4 thuat toan\n");
     printf("0. Thoat\n");
 }
 

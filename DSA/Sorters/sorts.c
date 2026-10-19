@@ -29,6 +29,7 @@ typedef struct {
 void insertion_sort(Student *a, int n, CompareFn cmp, SortStats *st);
 void selection_sort(Student *a, int n, CompareFn cmp, SortStats *st);
 void bubble_sort(Student *a, int n, CompareFn cmp, SortStats *st);
+void quick_sort(Student *a, int n, CompareFn cmp, SortStats *st);
 int is_sorted(const Student *a, int n, CompareFn cmp);
 int is_stable(const Student *a, int n, CompareFn cmp,
              const Student **bad1, const Student **bad2);
@@ -129,6 +130,43 @@ void bubble_sort(Student *a, int n, CompareFn cmp, SortStats *st) {
             break;
         }
     }
+    st->seconds = now_sec() - t0;
+}
+
+static int quick_partition(Student *a, int low, int high, CompareFn cmp, SortStats *st) {
+    Student pivot = a[high];
+    st->moves++;
+    int i = low;
+    for (int j = low; j < high; j++) {
+        st->comparisons++;
+        if (cmp(&a[j], &pivot) <= 0) {
+            Student t = a[i];
+            a[i] = a[j];
+            a[j] = t;
+            st->moves += 3;
+            i++;
+        }
+    }
+    Student t = a[i];
+    a[i] = a[high];
+    a[high] = t;
+    st->moves += 3;
+    return i;
+}
+
+static void quick_sort_range(Student *a, int low, int high, CompareFn cmp, SortStats *st) {
+    if (low >= high) {
+        return;
+    }
+    int pivot = quick_partition(a, low, high, cmp, st);
+    quick_sort_range(a, low, pivot - 1, cmp, st);
+    quick_sort_range(a, pivot + 1, high, cmp, st);
+}
+
+void quick_sort(Student *a, int n, CompareFn cmp, SortStats *st) {
+    st->comparisons = st->moves = 0;
+    double t0 = now_sec();
+    quick_sort_range(a, 0, n - 1, cmp, st);
     st->seconds = now_sec() - t0;
 }
 

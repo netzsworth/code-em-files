@@ -35,13 +35,14 @@ Nếu không truyền đường dẫn, chương trình sử dụng `students.csv
    - Xếp hạng chính: GPA giảm dần, số tín chỉ giảm dần, mã sinh viên
      tăng dần.
    - Chỉ xếp theo GPA giảm dần để kiểm tra tính ổn định.
-4. Xếp hạng bằng một trong ba thuật toán:
+4. Xếp hạng bằng một trong bốn thuật toán:
    - Insertion Sort.
    - Selection Sort.
    - Bubble Sort.
+    - Quick Sort.
 5. Hiển thị danh sách Top K và thống kê.
 6. Ghi các tệp kết quả.
-7. So sánh cả ba thuật toán trên cùng một dữ liệu.
+7. So sánh cả bốn thuật toán trên cùng một dữ liệu.
 0. Thoát chương trình.
 
 ## Điều kiện học bổng
@@ -57,7 +58,7 @@ Một sinh viên đủ điều kiện khi:
 - `main.c`: Menu, trạng thái chương trình và điểm bắt đầu thực thi.
 - `student.c`: Khai báo cấu trúc dữ liệu, đọc và kiểm tra CSV, lọc sinh
   viên, ghi tệp kết quả.
-- `sorts.c`: Các hàm so sánh, ba thuật toán sắp xếp và các hàm kiểm tra
+- `sorts.c`: Các hàm so sánh, bốn thuật toán sắp xếp và các hàm kiểm tra
   thứ tự, tính ổn định.
 
 ## Tệp dữ liệu mẫu
